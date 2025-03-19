@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>API Abfrage</title>
+    </head>
+    <body>
+        <div id="mySidenav" class="sidenav">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <button href="#">About</button>
+        </div>
+
+        <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+
+        <div id="main">
+            <h4>INPUT</h4>
+
+            <p>
+                <h5>Query 1</h5>
+                You are an executive summary generator. 
+                # TASK Summarize text enclosed in triple quotes in a short sentence and explain the rest of the text in a maximum of 3 bullet points. """{text}"""
+                
+                <h5>Query 2</h5>
+                You are a highly skilled AI trained in language comprehension and summarization. 
+                I would like you to read the text delimited by triple quotes and summarize it into a concise abstract paragraph. 
+                Aim to retain the most important points, providing a coherent and readable summary that could help a person understand the main points of the discussion without needing to read the entire text. 
+                Please avoid unnecessary details or tangential points. 
+                Only give me the output and nothing else. 
+                Do not wrap responses in quotes. 
+                Aim for a summary length of around 20 words. Please answer in language "{language}". """{text}"""  
+
+                <h5>Query 3</h5>
+                Du bist Support Mitarbeiter bei der blackpoint Gmbh im Bereich Infor CRM und Infor CPQ, Dein Name ist: {username} 
+                Wir Siezen Kunden. 
+                Kunden wissen wer wir sind und wir müssen uns nicht vorstellen. 
+                Alle Kunden haben ihre eigene Infor CRM instanz für die wir Support und Customizing anbieten. 
+                Der Kunde "{author name}", welcher zum Unternehmen "{company name}" gehört, hat eine Anfrage mit folgendem zusammengefassten Inhalt eingereicht:
+
+                <h5>Query 4</h5>
+                {text} Verfasse eine kurze Antwortmail an den Kunden. 
+                Wenn es eine Anfrage ist oder ein Feature Wunsch, schreibe dass wir die Anforderung prüfen und uns zurückmelden. 
+                Wenn es sich um ein Problem, Bug oder Systemausfall handelt, schreibe dass die Anfrage zur Problemlösung an den entsprechenden Kollegen weitergegeben wurde und er sich meldet.
+            </p>
+
+            <h4>TICKET</h4>
+            <p>
+                Zur Einarbeiten ins SData wird von den Auszubildenden eine Anwendung geschrieben, die von extern mit dem CRM spricht. Das Programm soll die SData-Schnittstelle verwenden, um Daten vom CRM zu lesen, löschen, erstellen und aktualisieren. Das Ganze kann wie folgt ablaufen:
+
+                Einarbeitung SData ( http://sage.github.io/SData-2.0/pages/core/0200/ ), wie sieht eine URL aus, was gibt es für Parameter, die notwendig wären
+                Einarbeitung HTTP-Requests, was gibt es für Typen (PUT, GET, POST,…), wie führe ich einen Request aus, wie definiere ich eine Payload
+                Fehlerhandling (was passiert, wenn der Server unerreichbar ist, was passiert, wenn es keine Daten für den Request gibt etc.)
+                Die oben genannten Konzepte sind unabhängig von der Programmiersprache, sollten aber in unserer Abteilung vorrangig mit C# durchgeführt werden. Als grobe Richtlinie dient folgende Aufgabe:
+
+                ______________________
+
+                Die Auszubildenden werden eine Anwendung schreiben, die Folgendes können soll:
+
+                Grafische Benutzeroberfläche, angeknüpft an https://redmine.blackpoint.de/issues/4988 (Berichtsheft)
+                Eine Möglichkeit, alle Berichtshefte einzusehen
+                Eine Möglichkeit, ein beliebiges Berichtsheft zu aktualisieren/löschen
+                Eine Möglichkeit, ein Berichtsheft neu zu erstellen
+                Zusätzliche, (aktuell) manuell programmierte Aggregatfunktionalitäten: Wie viele und welche Berichtshefte gibt es im Jahr 2023? Welche gibt es in der Kalenderwoche 23 im Jahr 2021? Wie viele haben “CX-Abteilung” als Abteilung etc.
+            </p>
+
+            <h4>ANTWORT</h4>
+            <p id="antwortRedmineText">
+                noch Leer...
+            </p>
+
+        </div>
+
+        <button class="open-button" onclick="openForm()">Chat</button>
+
+        <div class="chat-popup" id="myForm">
+        <form action="javascript:void(0);" class="form-container">
+            <h1>Chat</h1>
+
+            <label for="msg"><b>Message</b></label>
+            <textarea placeholder="Type message.." name="msg" required></textarea>
+
+            <button type="submit" class="btn" onclick="RequestAPI(msg.value)">Send</button>
+            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+        </form>
+        </div>
+    </body>
+    <script src="api_test.js"></script>
+</html>
