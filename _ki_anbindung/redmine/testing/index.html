@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multi-Option Button</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        /* Button-Styling */
+        .floating-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        /* Dropdown links vom Button */
+        .dropdown {
+            display: none;
+            position: fixed;
+            bottom: 20px;
+            right: 90px;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+        .dropdown button {
+            display: block;
+            width: 100%;
+            padding: 8px 12px;
+            border: none;
+            background: none;
+            text-align: left;
+            cursor: pointer;
+        }
+        .dropdown button:hover {
+            background-color: #f1f1f1;
+        }
+        /* Popup-Styling */
+        .popup {
+            display: none;
+            position: fixed;
+            bottom: 80px;
+            right: 250px;
+            width: 250px;
+            background: white;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            border: 1px solid #ccc;
+            z-index: 10; /* Popup bleibt über allem */
+        }
+        .popup textarea {
+            width: 100%;
+            height: 80px;
+            resize: none; /* Standardmäßig nicht resizable */
+            overflow: hidden;
+        }
+        .popup textarea:focus {
+            resize: vertical; /* Erst wenn Text eingegeben wird, resizable */
+        }
+        .popup button {
+            margin-top: 10px;
+            width: 100%;
+            background-color: #007bff;
+            color: white;
+            padding: 5px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <button class="floating-button" onclick="toggleDropdown()">Optionen</button>
+
+    <div class="dropdown" id="dropdown">
+        <button onclick="openPopup('Fasse die Beschreibung in 3 Stichpunkten zusammen')">Fasse die Beschreibung in 3 Stichpunkten zusammen</button>
+        <button onclick="openPopup('Antwortmail schreiben')">Antwortmail schreiben</button>
+        <button onclick="openPopup('Beschreibung zusammenfassen')">Beschreibung zusammenfassen</button>
+        <button onclick="openPopup('Mail auf Deutsch übersetzen')">Mail auf Deutsch übersetzen</button>
+        <button onclick="openPopup('Mail auf Englisch übersetzen')">Mail auf Englisch übersetzen</button>
+    </div>
+
+    <div class="popup" id="popup">
+        <p id="popup-title"></p>
+        <textarea placeholder="Ergebnis hier..."></textarea>
+        <button onclick="closePopup()">Schließen</button>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            let dropdown = document.getElementById("dropdown");
+            let popup = document.getElementById("popup");
+
+            if (dropdown.style.display === "block") {
+                dropdown.style.display = "none";
+            } else {
+                dropdown.style.display = "block";
+                popup.style.zIndex = "5"; // Popup bleibt im Vordergrund
+            }
+        }
+
+        function openPopup(title) {
+            let popup = document.getElementById("popup");
+            document.getElementById("popup-title").innerText = title;
+            popup.style.display = "block";
+            popup.style.zIndex = "10"; // Popup bleibt oben
+            document.getElementById("dropdown").style.display = "none"; // Schließt das Dropdown
+        }
+
+        function closePopup() {
+            document.getElementById("popup").style.display = "none";
+        }
+    </script>
+
+</body>
+</html>
